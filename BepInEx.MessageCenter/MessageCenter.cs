@@ -3,6 +3,7 @@ using BepInEx.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using BepInEx.Bootstrap;
 using UnityEngine;
 
 namespace BepInEx
@@ -25,6 +26,9 @@ namespace BepInEx
         {
             Enabled = Config.Wrap("General", "Show messages in UI", "Allow plugins to show on screen messages", true);
             Logging.Logger.Listeners.Add(new MessageLogListener());
+
+            foreach (var dependencyError in Chainloader.DependencyErrors)
+                ShowText(dependencyError);
         }
 
         private static void OnEntryLogged(LogEventArgs logEventArgs)
@@ -33,12 +37,16 @@ namespace BepInEx
             if ("BepInEx".Equals(logEventArgs.Source.SourceName, StringComparison.Ordinal)) return;
             if ((logEventArgs.Level & LogLevel.Message) == LogLevel.None) return;
 
+            if (logEventArgs.Data != null)
+                ShowText(logEventArgs.Data.ToString());
+        }
+
+        private static void ShowText(string logText)
+        {
             if (_showCounter <= 0)
                 _shownLogLines.Clear();
 
             _showCounter = Mathf.Clamp(_showCounter, 7, 12);
-
-            var logText = logEventArgs.Data?.ToString();
 
             var logEntry = _shownLogLines.FirstOrDefault(x => x.Text.Equals(logText, StringComparison.Ordinal));
             if (logEntry == null)
