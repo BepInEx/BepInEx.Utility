@@ -26,7 +26,10 @@ namespace BepInEx
         {
             Enabled = Config.Wrap("General", "Show messages in UI", "Allow plugins to show on screen messages", true);
             Logging.Logger.Listeners.Add(new MessageLogListener());
+        }
 
+        private void Start()
+        {
             foreach (var dependencyError in Chainloader.DependencyErrors)
                 ShowText(dependencyError);
         }
