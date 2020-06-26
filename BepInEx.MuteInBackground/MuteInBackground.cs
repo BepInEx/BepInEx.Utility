@@ -10,9 +10,8 @@ namespace BepInEx
     [BepInPlugin(GUID, PluginName, Version)]
     public partial class MuteInBackground : BaseUnityPlugin
     {
-        public const string GUID = "com.deathweasel.bepinex.muteinbackground";
+        public const string GUID = "BepInEx.MuteInBackground";
         public const string PluginName = "Mute In Background";
-        public const string PluginNameFull = "BepInEx.MuteInBackground";
         public const string Version = "1.0";
         internal static new ManualLogSource Logger;
 
