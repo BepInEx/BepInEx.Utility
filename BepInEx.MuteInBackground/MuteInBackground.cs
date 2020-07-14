@@ -12,7 +12,7 @@ namespace BepInEx
     {
         public const string GUID = "BepInEx.MuteInBackground";
         public const string PluginName = "Mute In Background";
-        public const string Version = "1.0";
+        public const string Version = "1.1";
         internal static new ManualLogSource Logger;
 
         internal static float? OriginalVolume = null;
