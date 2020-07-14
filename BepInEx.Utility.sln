@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BepInEx.MessageCenter", "Be
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BepInEx.MuteInBackground", "BepInEx.MuteInBackground\BepInEx.MuteInBackground.csproj", "{8C497934-1D86-4B34-A777-5A9A27AE364F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BepInEx.EnableResize", "BepInEx.EnableResize\BepInEx.EnableResize.csproj", "{B8CFC3BF-4724-4C80-86AC-6AA22AF2FE3B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{8C497934-1D86-4B34-A777-5A9A27AE364F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C497934-1D86-4B34-A777-5A9A27AE364F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C497934-1D86-4B34-A777-5A9A27AE364F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8CFC3BF-4724-4C80-86AC-6AA22AF2FE3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8CFC3BF-4724-4C80-86AC-6AA22AF2FE3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8CFC3BF-4724-4C80-86AC-6AA22AF2FE3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8CFC3BF-4724-4C80-86AC-6AA22AF2FE3B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
