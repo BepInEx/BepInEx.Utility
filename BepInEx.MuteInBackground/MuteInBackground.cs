@@ -19,7 +19,7 @@ namespace BepInEx
 
         public static ConfigEntry<bool> ConfigMuteInBackground { get; private set; }
 
-        internal void Start()
+        internal void Awake()
         {
             Logger = base.Logger;
             ConfigMuteInBackground = Config.Bind("Config", "Mute In Background", false, "Whether to mute the game when in the background, i.e. alt-tabbed.");
