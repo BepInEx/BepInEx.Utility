@@ -8,6 +8,9 @@ You need to have at least [BepInEx 5.x](https://github.com/BepInEx/BepInEx) inst
 - Download [latest release](https://github.com/BepInEx/BepInEx.Utility/releases) of the plugin.
 - Place the .dll inside your BepInEx\Plugins folder.
 
+## EnableResize
+Enable window resizing. Must be enabled in the plugin config either by editing the plugin's .cfg file or by using [ConfigurationManager](https://github.com/BepInEx/BepInEx.ConfigurationManager)
+
 ## MessageCenter
 A simple plugin that shows any log entries marked as "Message" on screen. Plugins generally use the "Message" log level for things that they want the user to read.
 
