@@ -1,15 +1,21 @@
 # BepInEx Utility Plugins
 Various BepInEx utility plugins for Unity games.
 
-You need to have at least [BepInEx 5.x](https://github.com/BepInEx/BepInEx) installed for the plugins to work.
+You need to have at least [BepInEx 5.1](https://github.com/BepInEx/BepInEx) installed for the plugins to work.
 
 #### How to use
-- Install [BepInEx 5.x](https://github.com/BepInEx/BepInEx).
+- Install [BepInEx 5.1](https://github.com/BepInEx/BepInEx) or higher.
 - Download [latest release](https://github.com/BepInEx/BepInEx.Utility/releases) of the plugin.
 - Place the .dll inside your BepInEx\Plugins folder.
 
+## EnableFullScreenToggle
+Enables toggling full screen with alt+enter on games with it disabled.
+
 ## EnableResize
 Enable window resizing. Must be enabled in the plugin config either by editing the plugin's .cfg file or by using [ConfigurationManager](https://github.com/BepInEx/BepInEx.ConfigurationManager)
+
+## InputHotkeyBlock
+Prevents plugin hotkeys from triggering while typing in an input field.
 
 ## MessageCenter
 A simple plugin that shows any log entries marked as "Message" on screen. Plugins generally use the "Message" log level for things that they want the user to read.
