@@ -72,9 +72,19 @@ namespace BepInEx
                 _showCounter -= Time.deltaTime;
         }
 
+        private GUIStyle _textStyle;
         private void OnGUI()
         {
             if (_showCounter <= 0) return;
+
+            if (_textStyle == null)
+            {
+                _textStyle = new GUIStyle
+                {
+                    alignment = TextAnchor.UpperLeft,
+                    fontSize = 20
+                };
+            }
 
             var textColor = Color.black;
             var outlineColor = Color.white;
@@ -85,11 +95,7 @@ namespace BepInEx
                 outlineColor.a = _showCounter;
             }
 
-            ShadowAndOutline.DrawOutline(new Rect(40, 20, Screen.width - 80, 160), _shownLogText, new GUIStyle
-            {
-                alignment = TextAnchor.UpperLeft,
-                fontSize = 20
-            }, textColor, outlineColor, 3);
+            ShadowAndOutline.DrawOutline(new Rect(40, 20, Screen.width - 80, 160), _shownLogText, _textStyle, textColor, outlineColor, 3);
         }
     }
 }
