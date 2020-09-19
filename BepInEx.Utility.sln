@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BepInEx.EnableFullScreenTog
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BepInEx.InputHotkeyBlock", "BepInEx.InputHotkeyBlock\BepInEx.InputHotkeyBlock.csproj", "{31BD63CB-75D9-4AA1-B97D-31F9DE3DDAEE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BepInEx.OptimizeIMGUI", "BepInEx.OptimizeIMGUI\BepInEx.OptimizeIMGUI.csproj", "{BC65F1D1-5B48-4B9B-A077-EB6195C2C8DB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{31BD63CB-75D9-4AA1-B97D-31F9DE3DDAEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31BD63CB-75D9-4AA1-B97D-31F9DE3DDAEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31BD63CB-75D9-4AA1-B97D-31F9DE3DDAEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC65F1D1-5B48-4B9B-A077-EB6195C2C8DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC65F1D1-5B48-4B9B-A077-EB6195C2C8DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC65F1D1-5B48-4B9B-A077-EB6195C2C8DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC65F1D1-5B48-4B9B-A077-EB6195C2C8DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
