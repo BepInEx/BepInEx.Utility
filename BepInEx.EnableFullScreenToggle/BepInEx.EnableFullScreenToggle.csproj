@@ -7,7 +7,7 @@
     <ProjectGuid>{D7B4A73A-1C1A-4C52-8FA6-3B52C2240C29}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BepInEx.EnableFullScreenToggle</RootNamespace>
+    <RootNamespace>BepInEx</RootNamespace>
     <AssemblyName>BepInEx.EnableFullScreenToggle</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

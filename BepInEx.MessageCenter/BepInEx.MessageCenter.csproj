@@ -7,7 +7,7 @@
     <ProjectGuid>{49F9A640-B592-4A4F-9B73-C8C6B8F28C22}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BepInEx.MessageCenter</RootNamespace>
+    <RootNamespace>BepInEx</RootNamespace>
     <AssemblyName>BepInEx.MessageCenter</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

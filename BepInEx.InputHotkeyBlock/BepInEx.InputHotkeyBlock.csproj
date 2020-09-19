@@ -7,7 +7,7 @@
     <ProjectGuid>{31BD63CB-75D9-4AA1-B97D-31F9DE3DDAEE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BepInEx.InputHotkeyBlock</RootNamespace>
+    <RootNamespace>BepInEx</RootNamespace>
     <AssemblyName>BepInEx.InputHotkeyBlock</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
