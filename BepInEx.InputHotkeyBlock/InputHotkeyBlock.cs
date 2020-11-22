@@ -28,26 +28,43 @@ namespace BepInEx
             Harmony.CreateAndPatchAll(typeof(Hooks));
         }
 
+        private static GameObject previousSelectedGameObject;
+        private static bool previousState;
+
         /// <summary>
         /// Check if an input field is selected
         /// </summary>
-        private static bool HotkeyBlock()
+        private static bool AllowInput()
         {
             //UI elements from some mods
             if (GUIUtility.keyboardControl > 0)
                 return false;
 
-            if (EventSystem.current?.currentSelectedGameObject != null)
+            var currentSelectedGameObject = EventSystem.current?.currentSelectedGameObject; // Checking with ? is fine here
+            if (currentSelectedGameObject != null)
             {
+                // Buffer results to prevent unnecessary GetComponent calls
+                if (currentSelectedGameObject == previousSelectedGameObject) 
+                    return previousState;
+
+                previousSelectedGameObject = currentSelectedGameObject;
+                previousState = false;
+
                 //TextMeshPro InputField
                 if (TMPInputFieldType != null)
-                    if (EventSystem.current.currentSelectedGameObject.GetComponent(TMPInputFieldType) != null)
+                    if (currentSelectedGameObject.GetComponent(TMPInputFieldType) != null)
                         return false;
 
                 //Other InputFields
-                if (EventSystem.current.currentSelectedGameObject.GetComponent<InputField>() != null)
+                if (currentSelectedGameObject.GetComponent<InputField>() != null)
                     return false;
             }
+            else
+            {
+                previousSelectedGameObject = null;
+            }
+
+            previousState = true;
             return true;
         }
 
@@ -57,17 +74,17 @@ namespace BepInEx
         internal static partial class Hooks
         {
             [HarmonyPrefix, HarmonyPatch(typeof(Input), nameof(Input.GetKey), typeof(KeyCode))]
-            internal static bool GetKeyCode() => HotkeyBlock();
+            internal static bool GetKeyCode() => AllowInput();
             [HarmonyPrefix, HarmonyPatch(typeof(Input), nameof(Input.GetKey), typeof(string))]
-            internal static bool GetKeyString() => HotkeyBlock();
+            internal static bool GetKeyString() => AllowInput();
             [HarmonyPrefix, HarmonyPatch(typeof(Input), nameof(Input.GetKeyDown), typeof(KeyCode))]
-            internal static bool GetKeyDownCode() => HotkeyBlock();
+            internal static bool GetKeyDownCode() => AllowInput();
             [HarmonyPrefix, HarmonyPatch(typeof(Input), nameof(Input.GetKeyDown), typeof(string))]
-            internal static bool GetKeyDownString() => HotkeyBlock();
+            internal static bool GetKeyDownString() => AllowInput();
             [HarmonyPrefix, HarmonyPatch(typeof(Input), nameof(Input.GetKeyUp), typeof(KeyCode))]
-            internal static bool GetKeyUpCode() => HotkeyBlock();
+            internal static bool GetKeyUpCode() => AllowInput();
             [HarmonyPrefix, HarmonyPatch(typeof(Input), nameof(Input.GetKeyUp), typeof(string))]
-            internal static bool GetKeyUpString() => HotkeyBlock();
+            internal static bool GetKeyUpString() => AllowInput();
         }
     }
 }
