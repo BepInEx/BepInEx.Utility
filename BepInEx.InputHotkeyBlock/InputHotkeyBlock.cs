@@ -31,11 +31,16 @@ namespace BepInEx
         private static GameObject previousSelectedGameObject;
         private static bool previousState;
 
+        private static bool inhibit;
+
         /// <summary>
         /// Check if an input field is selected
         /// </summary>
         private static bool AllowInput()
         {
+            if (inhibit)
+                return true;
+
             //UI elements from some mods
             if (GUIUtility.keyboardControl > 0)
                 return false;
@@ -44,20 +49,22 @@ namespace BepInEx
             if (currentSelectedGameObject != null)
             {
                 // Buffer results to prevent unnecessary GetComponent calls
-                if (currentSelectedGameObject == previousSelectedGameObject) 
+                if (currentSelectedGameObject == previousSelectedGameObject)
+                {
+                    if (IsWhitelistedKey()) return true;
                     return previousState;
+                }
 
                 previousSelectedGameObject = currentSelectedGameObject;
-                previousState = false;
 
-                //TextMeshPro InputField
-                if (TMPInputFieldType != null)
-                    if (currentSelectedGameObject.GetComponent(TMPInputFieldType) != null)
-                        return false;
+                if (currentSelectedGameObject.GetComponent<InputField>() != null ||
+                    TMPInputFieldType != null && currentSelectedGameObject.GetComponent(TMPInputFieldType) != null)
+                {
+                    previousState = false;
 
-                //Other InputFields
-                if (currentSelectedGameObject.GetComponent<InputField>() != null)
+                    if (IsWhitelistedKey()) return true;
                     return false;
+                }
             }
             else
             {
@@ -66,6 +73,14 @@ namespace BepInEx
 
             previousState = true;
             return true;
+        }
+
+        private static bool IsWhitelistedKey()
+        {
+            inhibit = true;
+            var isWhitelistedKey = Input.GetKey(KeyCode.Tab);
+            inhibit = false;
+            return isWhitelistedKey;
         }
 
         /// <summary>
