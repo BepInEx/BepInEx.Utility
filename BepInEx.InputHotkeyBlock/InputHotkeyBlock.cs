@@ -14,7 +14,7 @@ namespace BepInEx
     {
         public const string GUID = "BepInEx.InputHotkeyBlock";
         public const string PluginName = "Input Hotkey Block";
-        public const string Version = "1.3";
+        public const string Version = "1.4";
 
         private static Type TMPInputFieldType;
 
