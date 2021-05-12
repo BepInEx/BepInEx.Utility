@@ -20,6 +20,9 @@ Prevents plugin hotkeys from triggering while typing in an input field.
 ## MessageCenter
 A simple plugin that shows any log entries marked as "Message" on screen. Plugins generally use the "Message" log level for things that they want the user to read.
 
+## SuppressGetTypesErrorsPatcher
+A patcher that hooks Assembly.GetTypes() and handles ReflectionTypeLoadException. Useful when game code is using Assembly.GetTypes() without handling the exception, and it crashes on plugin assemblies that have types that can't be loaded.
+
 #### How to make my mod compatible?
 Use the `Logger` of your plugin and call its `LogMessage` method or `Log` method and pass in `LogLevel.Message` as a parameter. You don't have to reference this plugin, and everything will work fine if this plugin doesn't exist.
 
