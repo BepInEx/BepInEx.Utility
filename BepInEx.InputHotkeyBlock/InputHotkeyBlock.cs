@@ -25,7 +25,7 @@ namespace BepInEx
             if (TMPInputFieldType == null)
                 TMPInputFieldType = Type.GetType("TMPro.TMP_InputField, TextMeshPro-1.0.55.56.0b12");
 
-            Harmony.CreateAndPatchAll(typeof(Hooks));
+            HarmonyLib.Harmony.CreateAndPatchAll(typeof(Hooks));
         }
 
         private static GameObject previousSelectedGameObject;
