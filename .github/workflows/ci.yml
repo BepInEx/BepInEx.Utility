@@ -1,7 +1,6 @@
 name: ci
 
 on:
-  push:
   pull_request:
     branches: [master]
   workflow_dispatch:
@@ -15,12 +14,12 @@ jobs:
         os: [windows-latest]
     steps:
       - uses: actions/checkout@v2
-      - name: Dotnet Build
+      - name: Build
         run: |
           dotnet build -c Release
       - uses: actions/upload-artifact@v2
         with:
-          name: plugins-all-in-one
+          name: BepInEx.Utility.AllInOne
           path: bin/**/*.dll
           if-no-files-found: error
       - name: Package
@@ -28,6 +27,6 @@ jobs:
           pwsh release.ps1
       - uses: actions/upload-artifact@v2
         with:
-          name: plugins
+          name: Plugins
           path: bin/*.zip
           if-no-files-found: error
