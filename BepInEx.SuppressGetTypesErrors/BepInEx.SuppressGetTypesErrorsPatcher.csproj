@@ -1,11 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net45</TargetFramework>
+    <TargetFramework>net35</TargetFramework>    
   </PropertyGroup>
   <PropertyGroup Condition="$(Configuration) == 'Release'">
     <OutputPath>$(MSBuildThisFileDirectory)../bin/BepInEx/patchers</OutputPath>
   </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="Mono.Cecil" Version="0.*" IncludeAssets="compile" />
-  </ItemGroup>
 </Project>
