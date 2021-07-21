@@ -23,7 +23,7 @@ namespace BepInEx
         public static void Finish()
         {
             // Need to run this in finalizer after all assemblies are patched or we might patch an assembly that gets replaced later
-            HarmonyLib.Harmony.CreateAndPatchAll(typeof(SuppressGetTypesErrorsPatcher), GUID);
+            Harmony.CreateAndPatchAll(typeof(SuppressGetTypesErrorsPatcher), GUID);
         }
 
         [HarmonyPatch(typeof(Assembly), nameof(Assembly.GetTypes), new Type[0])]

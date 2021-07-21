@@ -1,8 +1,17 @@
 <Project>
   <PropertyGroup>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <Deterministic>true</Deterministic>
-    <LangVersion>latest</LangVersion>
+    <LangVersion>8</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Company>https://github.com/BepInEx/BepInEx.Utility</Company>
+    <Copyright>Copyright 2021 BepInEx</Copyright>
+    <!--https://docs.microsoft.com/en-us/dotnet/core/project-sdk/msbuild-props-->
+    <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
+    <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
+    <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
   </PropertyGroup>
   <PropertyGroup Condition="$(Configuration) == 'Release'">
     <OutputPath>$(MSBuildThisFileDirectory)/bin/BepInEx/plugins</OutputPath>
@@ -14,7 +23,7 @@
     <PackageReference Include="Microsoft.Unity.Analyzers" Version="1.*" PrivateAssets="all" />
     <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.*" PrivateAssets="all" />
     <PackageReference Include="Mono.Cecil" Version="0.10.*" IncludeAssets="compile" />
-    <PackageReference Include="Unity3D.UnityEngine.UI" Version="2018.3.5.1" IncludeAssets="compile" />
+    <PackageReference Include="UnityEngine.UI" Version="5.*" IncludeAssets="compile" />
     <PackageReference Include="BepinEx.Core" Version="5.*" IncludeAssets="compile" />
     <PackageReference Include="HarmonyX" Version="2.*" IncludeAssets="compile" />
   </ItemGroup>

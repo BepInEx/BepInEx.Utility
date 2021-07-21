@@ -22,7 +22,7 @@ namespace BepInEx
         {
             Logger = base.Logger;
 
-            HarmonyLib.Harmony.CreateAndPatchAll(typeof(Hooks));
+            Harmony.CreateAndPatchAll(typeof(Hooks));
         }
 
         private static class Hooks
