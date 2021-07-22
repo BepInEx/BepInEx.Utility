@@ -3,21 +3,26 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29020.237
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BepInEx.MessageCenter", "BepInEx.MessageCenter\BepInEx.MessageCenter.csproj", "{49F9A640-B592-4A4F-9B73-C8C6B8F28C22}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BepInEx.MessageCenter", "BepInEx.MessageCenter\BepInEx.MessageCenter.csproj", "{49F9A640-B592-4A4F-9B73-C8C6B8F28C22}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BepInEx.MuteInBackground", "BepInEx.MuteInBackground\BepInEx.MuteInBackground.csproj", "{8C497934-1D86-4B34-A777-5A9A27AE364F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BepInEx.EnableResize", "BepInEx.EnableResize\BepInEx.EnableResize.csproj", "{B8CFC3BF-4724-4C80-86AC-6AA22AF2FE3B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BepInEx.EnableResize", "BepInEx.EnableResize\BepInEx.EnableResize.csproj", "{B8CFC3BF-4724-4C80-86AC-6AA22AF2FE3B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BepInEx.EnableFullScreenToggle", "BepInEx.EnableFullScreenToggle\BepInEx.EnableFullScreenToggle.csproj", "{D7B4A73A-1C1A-4C52-8FA6-3B52C2240C29}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BepInEx.EnableFullScreenToggle", "BepInEx.EnableFullScreenToggle\BepInEx.EnableFullScreenToggle.csproj", "{D7B4A73A-1C1A-4C52-8FA6-3B52C2240C29}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BepInEx.InputHotkeyBlock", "BepInEx.InputHotkeyBlock\BepInEx.InputHotkeyBlock.csproj", "{31BD63CB-75D9-4AA1-B97D-31F9DE3DDAEE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BepInEx.InputHotkeyBlock", "BepInEx.InputHotkeyBlock\BepInEx.InputHotkeyBlock.csproj", "{31BD63CB-75D9-4AA1-B97D-31F9DE3DDAEE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BepInEx.OptimizeIMGUI", "BepInEx.OptimizeIMGUI\BepInEx.OptimizeIMGUI.csproj", "{BC65F1D1-5B48-4B9B-A077-EB6195C2C8DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BepInEx.OptimizeIMGUI", "BepInEx.OptimizeIMGUI\BepInEx.OptimizeIMGUI.csproj", "{BC65F1D1-5B48-4B9B-A077-EB6195C2C8DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BepInEx.SuppressGetTypesErrorsPatcher", "BepInEx.SuppressGetTypesErrors\BepInEx.SuppressGetTypesErrorsPatcher.csproj", "{F2A30C40-4073-45AC-8325-E255BD2B011D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BepInEx.SuppressGetTypesErrorsPatcher", "BepInEx.SuppressGetTypesErrors\BepInEx.SuppressGetTypesErrorsPatcher.csproj", "{F2A30C40-4073-45AC-8325-E255BD2B011D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BepInEx.CatchUnityEventExceptions", "BepInEx.CatchUnityEventExceptions\BepInEx.CatchUnityEventExceptions.csproj", "{29D4BA63-9886-4C1A-9AAA-D9EBAF1AC9BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BepInEx.CatchUnityEventExceptions", "BepInEx.CatchUnityEventExceptions\BepInEx.CatchUnityEventExceptions.csproj", "{29D4BA63-9886-4C1A-9AAA-D9EBAF1AC9BA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C608E12F-6CFC-443E-9651-543333313F8D}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

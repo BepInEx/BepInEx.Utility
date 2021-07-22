@@ -1,0 +1,32 @@
+name: ci
+
+on:
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: true
+      matrix:
+        os: [windows-latest]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build
+        run: |
+          dotnet build -c Release
+      - uses: actions/upload-artifact@v2
+        with:
+          name: BepInEx.Utility.AllInOne
+          path: bin/**/*.dll
+          if-no-files-found: error
+      - name: Package
+        run: |
+          pwsh release.ps1
+      - uses: actions/upload-artifact@v2
+        with:
+          name: Plugins
+          path: bin/*.zip
+          if-no-files-found: error

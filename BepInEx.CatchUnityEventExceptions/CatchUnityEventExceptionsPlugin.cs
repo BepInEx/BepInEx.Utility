@@ -22,7 +22,7 @@ namespace BepInEx
 
             try
             {
-                HarmonyLib.Harmony.CreateAndPatchAll(typeof(Hooks), GUID);
+                Harmony.CreateAndPatchAll(typeof(Hooks), GUID);
             }
             catch (Exception e)
             {
