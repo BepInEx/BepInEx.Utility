@@ -37,3 +37,6 @@ A patcher that hooks Assembly.GetTypes() and handles ReflectionTypeLoadException
 
 ## OptimizeIMGUI
 Reduce unnecessary GC allocations of Unity's IMGUI (OnGUI) interface system. It fixes the passive GC allocations that happen every frame caused by using any OnGUI code at all, and reduces GC allocations for OnGUI code. 
+
+## ResourceUnloadOptimizations
+Improves loading times and reduces or eliminates stutter in games that abuse Resources.UnloadUnusedAssets and/or GC.Collect.
