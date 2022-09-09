@@ -58,7 +58,7 @@ namespace BepInEx
         private int borderlessMask = WS_CAPTION | WS_MAXIMIZEBOX | WS_MINIMIZEBOX | WS_SYSMENU | WS_THICKFRAME;
         private WaitForSecondsRealtime oneSecond = new WaitForSecondsRealtime(1f);
 
-        private void Awake()
+        internal void Awake()
         {
             ConfigEnableResize = Config.Bind("Config", "Enable Resize", true, "Whether to allow the game window to be resized. Requires game restart to take effect.");
             _ConfigEnableResize = ConfigEnableResize.Value;
