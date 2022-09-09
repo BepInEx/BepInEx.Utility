@@ -14,11 +14,10 @@ namespace BepInEx
         public const string GUID = "BepInEx.EnableResize";
         public const string PluginName = "Enable Resize";
         public const string Version = "2.0";
-        
-        public delegate bool EnumWindowsProc(IntPtr hWnd, IntPtr lParam);
 
-        private static bool _ConfigEnableResize;
         public static ConfigEntry<bool> ConfigEnableResize { get; private set; }
+
+        public delegate bool EnumWindowsProc(IntPtr hWnd, IntPtr lParam);
 
         [DllImport("user32.dll")]
         private static extern bool EnumWindows(EnumWindowsProc enumProc, IntPtr lParam);
@@ -61,8 +60,7 @@ namespace BepInEx
         internal void Awake()
         {
             ConfigEnableResize = Config.Bind("Config", "Enable Resize", true, "Whether to allow the game window to be resized. Requires game restart to take effect.");
-            _ConfigEnableResize = ConfigEnableResize.Value;
-            if (!_ConfigEnableResize) return;
+            if (!ConfigEnableResize.Value) return;
 
             var pid = Process.GetCurrentProcess().Id;
             EnumWindows((w, param) =>
@@ -80,6 +78,7 @@ namespace BepInEx
             if (WindowHandle == IntPtr.Zero) return;
 
             StartCoroutine(TestScreen());
+            ConfigEnableResize.SettingChanged += (sender, args) =>  StartCoroutine(TestScreen());
         }
 
         private IEnumerator TestScreen()
