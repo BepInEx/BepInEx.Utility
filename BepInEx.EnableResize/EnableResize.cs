@@ -44,22 +44,22 @@ namespace BepInEx
         private const int WS_SYSMENU = 0x80000;
         private const int WS_THICKFRAME = 0x40000;
 
-        private const string GET_CLASS_NAME_MAGIC = "UnityWndClass"; //How Anon got this???
+        private const string GET_CLASS_NAME_MAGIC = "UnityWndClass";
         private IntPtr WindowHandle = IntPtr.Zero;
 
-        private int style = 0;
-        private bool fs = false;
-        private bool prevFS = true;
-        private int res = 0;
-        private int prevRes = 1;
-        private int borderless = 1;
-        private int prevBorderless = 0;
+        private int windowStyle = 0;
+        private bool fullScreen = false;
+        private bool prevFullScreen = true;
+        private int resolutionCheck = 0;
+        private int prevResolutionCheck = 1;
+        private int borderlessStyle = 1;
+        private int prevBorderlessStyle = 0;
         private int borderlessMask = WS_CAPTION | WS_MAXIMIZEBOX | WS_MINIMIZEBOX | WS_SYSMENU | WS_THICKFRAME;
         private WaitForSecondsRealtime oneSecond = new WaitForSecondsRealtime(1f);
 
         internal void Awake()
         {
-            ConfigEnableResize = Config.Bind("Config", "Enable Resize", true, "Whether to allow the game window to be resized. Requires game restart to take effect.");
+            ConfigEnableResize = Config.Bind("Config", "Enable Resize", false, "Whether to allow the game window to be resized. Requires game restart to take effect.");
             if (!ConfigEnableResize.Value) return;
 
             var pid = Process.GetCurrentProcess().Id;
@@ -87,34 +87,34 @@ namespace BepInEx
             {
                 if (!ConfigEnableResize.Value) yield break;
 
-                fs = Screen.fullScreen;
-                res = Screen.width + Screen.height;
-                style = GetWindowLong(WindowHandle, GWL_STYLE);
+                fullScreen = Screen.fullScreen;
+                resolutionCheck = Screen.width + Screen.height;
+                windowStyle = GetWindowLong(WindowHandle, GWL_STYLE);
 
                 // If zero, is in borderless mode
-                borderless = style & borderlessMask;
+                borderlessStyle = windowStyle & borderlessMask;
 
-                if (!fs && prevFS ||
-                    res != prevRes ||
-                    borderless != 0 && prevBorderless == 0)
+                if (!fullScreen && prevFullScreen ||
+                    resolutionCheck != prevResolutionCheck ||
+                    (borderlessStyle != 0) && (prevBorderlessStyle == 0))
                 {
                     ResizeWindow();
                 }
 
-                prevBorderless = borderless;
-                prevFS = fs;
-                prevRes = res;
+                prevBorderlessStyle = borderlessStyle;
+                prevFullScreen = fullScreen;
+                prevResolutionCheck = resolutionCheck;
                 yield return oneSecond;
             }
         }
 
         private void ResizeWindow()
         {
-            if (fs) return;
-            if (borderless == 0) return;
-            style = GetWindowLong(WindowHandle, GWL_STYLE);
-            style |= WS_THICKFRAME | WS_MAXIMIZEBOX;
-            SetWindowLong(WindowHandle, GWL_STYLE, style);
+            if (fullScreen) return;
+            if (borderlessStyle == 0) return;
+            windowStyle = GetWindowLong(WindowHandle, GWL_STYLE);
+            windowStyle |= WS_THICKFRAME | WS_MAXIMIZEBOX;
+            SetWindowLong(WindowHandle, GWL_STYLE, windowStyle);
         }
     }
 }
