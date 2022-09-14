@@ -55,12 +55,27 @@ namespace BepInEx
         private int borderlessStyle = 1;
         private int prevBorderlessStyle = 0;
         private int borderlessMask = WS_CAPTION | WS_MAXIMIZEBOX | WS_MINIMIZEBOX | WS_SYSMENU | WS_THICKFRAME;
+
         private WaitForSecondsRealtime oneSecond = new WaitForSecondsRealtime(1f);
+        private bool isInitialized = false;
 
         internal void Awake()
         {
-            ConfigEnableResize = Config.Bind("Config", "Enable Resize", false, "Whether to allow the game window to be resized. Requires game restart to take effect.");
+            ConfigEnableResize = Config.Bind("Config", "Enable Resize", false, "Whether to allow the game window to be resized.");
+            ConfigEnableResize.SettingChanged += (sender, args) => Initialize();
+
+            Initialize();
+        }
+
+        private void Initialize()
+        {
             if (!ConfigEnableResize.Value) return;
+
+            if (isInitialized)
+            {
+                StartCoroutine(TestScreen());
+                return;
+            }
 
             var pid = Process.GetCurrentProcess().Id;
             EnumWindows((w, param) =>
@@ -77,8 +92,9 @@ namespace BepInEx
 
             if (WindowHandle == IntPtr.Zero) return;
 
+            isInitialized = true;
+
             StartCoroutine(TestScreen());
-            ConfigEnableResize.SettingChanged += (sender, args) =>  StartCoroutine(TestScreen());
         }
 
         private IEnumerator TestScreen()
