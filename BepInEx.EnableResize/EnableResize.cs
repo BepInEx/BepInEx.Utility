@@ -1,10 +1,10 @@
 ﻿using BepInEx.Configuration;
 using System;
+using System.Collections;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace BepInEx
 {
@@ -13,11 +13,11 @@ namespace BepInEx
     {
         public const string GUID = "BepInEx.EnableResize";
         public const string PluginName = "Enable Resize";
-        public const string Version = "1.5";
-        public delegate bool EnumWindowsProc(IntPtr hWnd, IntPtr lParam);
+        public const string Version = "2.0";
 
-        private static bool _ConfigEnableResize;
         public static ConfigEntry<bool> ConfigEnableResize { get; private set; }
+
+        public delegate bool EnumWindowsProc(IntPtr hWnd, IntPtr lParam);
 
         [DllImport("user32.dll")]
         private static extern bool EnumWindows(EnumWindowsProc enumProc, IntPtr lParam);
@@ -34,19 +34,48 @@ namespace BepInEx
         [DllImport("user32.dll")]
         public static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
 
+        // Almost the same: https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowlongptra
         private const int GWL_STYLE = -16;
-        private const int WS_THICKFRAME = 0x40000;
-        private const int WS_MAXIMIZEBOX = 0x10000;
-        private const string GET_CLASS_NAME_MAGIC = "UnityWndClass";
 
+        // https://docs.microsoft.com/en-us/windows/win32/winmsg/window-styles
+        private const int WS_CAPTION = 0XC00000;
+        private const int WS_MAXIMIZEBOX = 0x10000;
+        private const int WS_MINIMIZEBOX = 0x20000;
+        private const int WS_SYSMENU = 0x80000;
+        private const int WS_THICKFRAME = 0x40000;
+
+        private const string GET_CLASS_NAME_MAGIC = "UnityWndClass";
         private IntPtr WindowHandle = IntPtr.Zero;
-        private bool prev = false;
+
+        private int windowStyle = 0;
+        private bool fullScreen = false;
+        private bool prevFullScreen = true;
+        private int resolutionCheck = 0;
+        private int prevResolutionCheck = 1;
+        private int borderlessStyle = 1;
+        private int prevBorderlessStyle = 0;
+        private int borderlessMask = WS_CAPTION | WS_MAXIMIZEBOX | WS_MINIMIZEBOX | WS_SYSMENU | WS_THICKFRAME;
+
+        private WaitForSecondsRealtime oneSecond = new WaitForSecondsRealtime(1f);
+        private bool isInitialized = false;
 
         internal void Awake()
         {
-            ConfigEnableResize = Config.Bind("Config", "Enable Resize", false, "Whether to allow the game window to be resized. Requires game restart to take effect.");
-            _ConfigEnableResize = ConfigEnableResize.Value;
-            if (!_ConfigEnableResize) return;
+            ConfigEnableResize = Config.Bind("Config", "Enable Resize", false, "Whether to allow the game window to be resized.");
+            ConfigEnableResize.SettingChanged += (sender, args) => Initialize();
+
+            Initialize();
+        }
+
+        private void Initialize()
+        {
+            if (!ConfigEnableResize.Value) return;
+
+            if (isInitialized)
+            {
+                StartCoroutine(TestScreen());
+                return;
+            }
 
             var pid = Process.GetCurrentProcess().Id;
             EnumWindows((w, param) =>
@@ -62,26 +91,46 @@ namespace BepInEx
             }, IntPtr.Zero);
 
             if (WindowHandle == IntPtr.Zero) return;
-            SceneManager.sceneLoaded += (s, lsm) =>
-            {
-                if (lsm == LoadSceneMode.Single) ResizeWindow();
-            };
+
+            isInitialized = true;
+
+            StartCoroutine(TestScreen());
         }
 
-        internal void Update()
+        private IEnumerator TestScreen()
         {
-            if (!ConfigEnableResize.Value) return;
-            var fs = Screen.fullScreen;
-            if (!fs && prev) ResizeWindow();
-            prev = fs;
+            while (true)
+            {
+                if (!ConfigEnableResize.Value) yield break;
+
+                fullScreen = Screen.fullScreen;
+                resolutionCheck = Screen.width + Screen.height;
+                windowStyle = GetWindowLong(WindowHandle, GWL_STYLE);
+
+                // If zero, is in borderless mode
+                borderlessStyle = windowStyle & borderlessMask;
+
+                if (!fullScreen && prevFullScreen ||
+                    resolutionCheck != prevResolutionCheck ||
+                    (borderlessStyle != 0) && (prevBorderlessStyle == 0))
+                {
+                    ResizeWindow();
+                }
+
+                prevBorderlessStyle = borderlessStyle;
+                prevFullScreen = fullScreen;
+                prevResolutionCheck = resolutionCheck;
+                yield return oneSecond;
+            }
         }
 
         private void ResizeWindow()
         {
-            if (Screen.fullScreen) return;
-            var style = GetWindowLong(WindowHandle, GWL_STYLE);
-            style |= WS_THICKFRAME | WS_MAXIMIZEBOX;
-            SetWindowLong(WindowHandle, GWL_STYLE, style);
+            if (fullScreen) return;
+            if (borderlessStyle == 0) return;
+            windowStyle = GetWindowLong(WindowHandle, GWL_STYLE);
+            windowStyle |= WS_THICKFRAME | WS_MAXIMIZEBOX;
+            SetWindowLong(WindowHandle, GWL_STYLE, windowStyle);
         }
     }
 }
