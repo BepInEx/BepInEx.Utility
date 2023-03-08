@@ -13,7 +13,7 @@ namespace BepInEx
     {
         public const string GUID = "BepInEx.EnableResize";
         public const string PluginName = "Enable Resize";
-        public const string Version = "2.0";
+        public const string Version = "3.0";
 
         public static ConfigEntry<bool> ConfigEnableResize { get; private set; }
 
