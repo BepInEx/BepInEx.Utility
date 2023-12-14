@@ -1,11 +1,11 @@
 # BepInEx Utility Plugins
-Various BepInEx utility plugins for Unity games.
+Various universal BepInEx utility plugins for Unity games running on mono. If the game is compiled with IL2CPP, use [BepInEx.Utility.IL2CPP](https://github.com/BepInEx/BepInEx.Utility.IL2CPP) instead.
 
-You need to have at least [BepInEx 5.1](https://github.com/BepInEx/BepInEx) installed for the plugins to work.
+You need to have the latest version of [BepInEx 5.x](https://github.com/BepInEx/BepInEx) installed for the plugins to work.
 
 #### How to use
-- Install [BepInEx 5.1](https://github.com/BepInEx/BepInEx) or higher.
-- Download [latest release](https://github.com/BepInEx/BepInEx.Utility/releases) of the plugin.
+- Install the latest verion [BepInEx 5.x](https://github.com/BepInEx/BepInEx).
+- Download the [latest release](https://github.com/BepInEx/BepInEx.Utility/releases) of the plugin you want.
 - Place the .dll inside your BepInEx\Plugins folder.
 
 ## EnableFullScreenToggle
