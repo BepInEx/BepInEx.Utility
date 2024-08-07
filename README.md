@@ -42,3 +42,6 @@ Reduce unnecessary GC allocations of Unity's IMGUI (OnGUI) interface system. It 
 
 ## ResourceUnloadOptimizations
 Improves loading times and reduces or eliminates stutter in games that abuse Resources.UnloadUnusedAssets and/or GC.Collect.
+
+## IMGUITextCursorFix
+Fixes a bug that in some Unity versions prevents the IMGUI text editor from keeping the cursor visible in overflowing text.
