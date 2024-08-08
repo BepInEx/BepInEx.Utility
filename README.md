@@ -42,3 +42,6 @@ Reduce unnecessary GC allocations of Unity's IMGUI (OnGUI) interface system. It 
 
 ## ResourceUnloadOptimizations
 Improves loading times and reduces or eliminates stutter in games that abuse Resources.UnloadUnusedAssets and/or GC.Collect.
+
+## IMGUITextCursorFix
+This plugin addresses a bug present in certain Unity versions, starting around version 2019, which locks the IMGUI text box position at the beginning, preventing the cursor from being visible when the text exceeds the display area.
