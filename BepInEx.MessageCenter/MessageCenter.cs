@@ -20,11 +20,11 @@ namespace BepInEx
         private static float _showCounter;
         private static string _shownLogText = string.Empty;
 
-        public static ConfigWrapper<bool> Enabled { get; private set; }
+        public static ConfigEntry<bool> Enabled { get; private set; }
 
         public MessageCenter()
         {
-            Enabled = Config.Wrap("General", "Show messages in UI", "Allow plugins to show on screen messages", true);
+            Enabled = Config.Bind("General", "Show messages in UI", true, "Allow plugins to show on screen messages");
             Logging.Logger.Listeners.Add(new MessageLogListener());
         }
 
