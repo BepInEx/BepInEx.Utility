@@ -22,9 +22,7 @@
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.*" PrivateAssets="all" />
     <PackageReference Include="Microsoft.Unity.Analyzers" Version="1.*" PrivateAssets="all" />
     <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.*" PrivateAssets="all" />
-    <PackageReference Include="Mono.Cecil" Version="0.10.*" IncludeAssets="compile" />
     <PackageReference Include="UnityEngine.UI" Version="5.*" IncludeAssets="compile" />
     <PackageReference Include="BepinEx.Core" Version="5.*" IncludeAssets="compile" />
-    <PackageReference Include="HarmonyX" Version="2.*" IncludeAssets="compile" />
   </ItemGroup>
 </Project>
