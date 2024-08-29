@@ -13,7 +13,7 @@ namespace BepInEx
     {
         public const string GUID = "com.bepis.messagecenter";
         public const string PluginName = "Message Center";
-        public const string Version = "1.1.1";
+        public const string Version = "1.1.1.1";
 
         private static readonly List<LogEntry> _shownLogLines = new List<LogEntry>();
 
